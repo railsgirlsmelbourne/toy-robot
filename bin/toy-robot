@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH << File.expand_path("../../lib", __FILE__)
+require "bundler/setup"
+require "toy_robot"
+
+# Run ToyRobot in Simulator mode
+toy_robot_cli = ToyRobot::CLI.new
+
+if ARGV.count == 1
+  toy_robot_cli.run_from_file(ARGV[0])
+else
+  toy_robot_cli.run
+end
