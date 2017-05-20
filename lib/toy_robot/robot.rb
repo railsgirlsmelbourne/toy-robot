@@ -24,19 +24,11 @@ module ToyRobot
     end
 
     def turn_left
-      if direction_index == -1
-        face(direction[direction.length - 1])
-      else
-        face(directions[direction_index - 1])
-      end
+      face(directions.rotate(-1)[direction_index])
     end
 
     def turn_right
-      if direction_index == direction.length - 1
-        face(directions[0])
-      else
-        face(directions[direction_index + 1])
-      end
+      face(directions.rotate[direction_index])
     end
 
     private
