@@ -7,7 +7,7 @@ module ToyRobot
 
     attr_accessor :table_top, :robot
 
-    Commands = [:place, :move, :report].freeze
+    Commands = [:place, :move, :report, :left, :right].freeze
 
     def initialize
       @table_top = TableTop.new
@@ -29,7 +29,15 @@ module ToyRobot
 
     def report
       return false unless robot_placed?
-      table_top.position[:x].to_s + "," + table_top.position[:y].to_s  + "," +  robot.direction.to_s.upcase
+      "#{position[:x]},#{position[:y]},#{direction.upcase}"
+    end
+
+    def left
+      robot.turn_left
+    end
+
+    def right
+      robot.turn_right
     end
 
     private
@@ -53,6 +61,10 @@ module ToyRobot
 
     def route
       robot.route
+    end
+
+    def direction
+      robot.direction
     end
 
     def valid_placement?(items)

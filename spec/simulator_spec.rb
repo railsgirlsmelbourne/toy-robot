@@ -4,15 +4,17 @@ RSpec.describe ToyRobot::Simulator do
 
   let(:simulator) { ToyRobot::Simulator.new }
 
-  describe "#valid commands" do
+  describe "#commands" do
 
-    [:place, :move, :report].each do |command|
+    context "#valid commands" do
+    [:place, :move, :report, :left, :right].each do |command|
 
       it "recognize #{command} as valid command" do
         expect(ToyRobot::Simulator::Commands).to include(command)
       end
     end
-  end
+   end
+ end
 
   describe "#place" do
 
