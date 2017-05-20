@@ -4,6 +4,16 @@ RSpec.describe ToyRobot::Simulator do
 
   let(:simulator) { ToyRobot::Simulator.new }
 
+  describe "#valid commands" do
+
+    [:place, :move, :report].each do |command|
+
+      it "recognize #{command} as valid command" do
+        expect(ToyRobot::Simulator::Commands).to include(command)
+      end
+    end
+  end
+
   describe "#place" do
 
     it "returns the placed coordinates" do
@@ -36,6 +46,20 @@ RSpec.describe ToyRobot::Simulator do
 
     it "raises an exception if robot has not been placed" do
       expect { simulator.move }.to raise_exception ToyRobot::InvalidPlacement
+    end
+
+  end
+
+  describe "#report" do
+
+    it "returns position if robot has been placed on table top" do
+      simulator.place("1,1,NORTH")
+      expect(simulator.report).to eql("1,1,NORTH")
+
+    end
+
+    it "throws exception when robot is not placed on table top" do
+      expect { simulator.report }.to raise_exception ToyRobot::InvalidPlacement
     end
 
   end

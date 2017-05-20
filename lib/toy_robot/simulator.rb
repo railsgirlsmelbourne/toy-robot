@@ -7,7 +7,7 @@ module ToyRobot
 
     attr_accessor :table_top, :robot
 
-    Commands = [:place, :move].freeze
+    Commands = [:place, :move, :report].freeze
 
     def initialize
       @table_top = TableTop.new
@@ -27,6 +27,11 @@ module ToyRobot
       table_top.place(position[:x] + route[:x], position[:y] + route[:y])
     end
 
+    def report
+      return false unless robot_placed?
+      table_top.position[:x].to_s + "," + table_top.position[:y].to_s  + "," +  robot.direction.to_s.upcase
+    end
+
     private
 
     def split_location(placement)
@@ -39,6 +44,8 @@ module ToyRobot
         direction: items[2].downcase.to_sym
       }
     end
+
+    # PLACE 1,1,north
 
     def position
       table_top.position
