@@ -70,7 +70,7 @@ module ToyRobot
     def valid_placement?(items)
       return true if items.length == 3
 
-      raise InvalidPlacement, "Error: 'PLACE' command requires 3 arguments"
+      raise InvalidPlacement, "Error: 'PLACE' command requires at least 3 arguments"
     end
 
     def robot_placed?
