@@ -3,6 +3,7 @@ module ToyRobot
   class Robot
     attr_accessor :direction
 
+#ordered hash
     Vector = {
       north: { x:  0, y:  1 },
       east:  { x:  1, y:  0 },
@@ -20,6 +21,14 @@ module ToyRobot
 
     def route
       Vector[direction]
+    end
+
+    def turn_left
+      face(directions.rotate(-1)[direction_index])
+    end
+
+    def turn_right
+      face(directions.rotate[direction_index])
     end
 
     private

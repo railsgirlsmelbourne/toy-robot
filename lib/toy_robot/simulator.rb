@@ -7,7 +7,7 @@ module ToyRobot
 
     attr_accessor :table_top, :robot
 
-    Commands = [:place, :move].freeze
+    Commands = [:place, :move, :report, :left, :right].freeze
 
     def initialize
       @table_top = TableTop.new
@@ -27,6 +27,19 @@ module ToyRobot
       table_top.place(position[:x] + route[:x], position[:y] + route[:y])
     end
 
+    def report
+      return false unless robot_placed?
+      "#{position[:x]},#{position[:y]},#{direction.upcase}"
+    end
+
+    def left
+      robot.turn_left
+    end
+
+    def right
+      robot.turn_right
+    end
+
     private
 
     def split_location(placement)
@@ -40,6 +53,8 @@ module ToyRobot
       }
     end
 
+    # PLACE 1,1,north
+
     def position
       table_top.position
     end
@@ -48,10 +63,14 @@ module ToyRobot
       robot.route
     end
 
+    def direction
+      robot.direction
+    end
+
     def valid_placement?(items)
       return true if items.length == 3
 
-      raise InvalidPlacement, "Error: 'PLACE' command requires 3 arguments"
+      raise InvalidPlacement, "Error: 'PLACE' command requires at least 3 arguments"
     end
 
     def robot_placed?

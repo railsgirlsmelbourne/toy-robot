@@ -43,4 +43,34 @@ RSpec.describe ToyRobot::Robot do
 
   end
 
+  describe "#turn robot" do
+
+    it "turns the robot left" do
+      robot.face(:north)
+      robot.turn_left
+      expect(robot.direction).to eql(:west)
+    end
+
+    it "turns the robot right" do
+      robot.face(:north)
+      robot.turn_right
+      expect(robot.direction).to eql(:east)
+    end
+
+    it "faces same direction after turning left four times" do
+      robot.face(:east)
+      4.times do
+        robot.turn_left
+      end
+      expect(robot.direction).to eql(:east)
+    end
+
+    it "faces same direction after turning right four times" do
+      robot.face(:south)
+      4.times do
+        robot.turn_right
+      end
+      expect(robot.direction).to eql(:south)
+    end
+  end
 end
